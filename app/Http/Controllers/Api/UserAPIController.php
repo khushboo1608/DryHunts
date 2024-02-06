@@ -355,7 +355,7 @@ class UserAPIController extends BaseAPIController
             }
             else
             {   
-                return $this->sendError(__('messages.api.user.email_or_password_incorrect'),config('global.null_object'),200,false);
+                return $this->sendError(__('messages.api.user.user_disable'),config('global.null_object'),200,false);
             }
         }
         catch(\Exception $e)

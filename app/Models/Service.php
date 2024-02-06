@@ -25,6 +25,8 @@ class Service extends Model
         'is_popular',
         'service_status',        
     ];
+    
+    
     public function CategoryData() {
         return $this->hasOne('App\Models\Category', 'category_id', 'category_id');
     }

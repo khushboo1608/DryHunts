@@ -75,7 +75,8 @@ return [
             'confirm_password_maxlength'        => 'Confim password cannot greater than 20 characters',
             'confirm_new_password_not_match'    => 'Confim password and new password should be same',
             'password_should_different'         => 'Old password and new password should not be same.',
-            'invalid_oldpassword' => 'Incorrect old password.'
+            'invalid_oldpassword' => 'Incorrect old password.',
+            'user_disable' => 'Your account is disabled.'
         ],
         'category' => [
             'category_get_success' => 'Category data get successfully.',

@@ -130,11 +130,13 @@ class SettingAPIController extends BaseAPIController
     }
     
     public function TestimonialFilter(Request $request)
-    {    
+    {   
         try
         {
+            
             $input = $request->all();    
-          
+            //  dd($input);
+            
             $query = Testimonial::query();
 
             if ($input['category_id']) {

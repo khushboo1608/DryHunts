@@ -36,13 +36,14 @@ use App\Http\Controllers\Web\WebHomeController;
 //     return view('welcome');
 // });
 
-    Auth::routes();
+Auth::routes();
 
-    Route::get('/',     [Main::class, 'index'])->name('home');
-    // Route::get('/test', [Main::class, 'test'])->name('test');
-    Route::get('/userlogin',     [Main::class, 'userlogin'])->name('userlogin');
-    // Route::get('/userregister',     [Main::class, 'userregister'])->name('userregister');
-    Route::get('/get-dropdown-options',[Main::class,'getDropdownOptions']);
+Route::get('/',     [Main::class, 'index'])->name('home');
+// Route::get('/test', [Main::class, 'test'])->name('test');
+Route::get('/userlogin',     [Main::class, 'userlogin'])->name('userlogin');
+// Route::get('/userregister',     [Main::class, 'userregister'])->name('userregister');
+
+Route::get('/get-dropdown-options',[Main::class,'getDropdownOptions']);
     Route::get('/get-dropdown-taluka-options',[Main::class,'getDropdownTalukaOptions']);
     Route::get('/get-dropdown-pincode-options',[Main::class,'getDropdownPincodeOptions']);
     Route::get('/get-dropdown-service-options',[Main::class,'getDropdownServiceOptions']);
@@ -65,7 +66,7 @@ use App\Http\Controllers\Web\WebHomeController;
     Route::get('contactus',[Main::class,'contactus']);
    
     // Route::get('/thankyou',[Main::class,'thankyou']);
-  Route::middleware('auth','preventBackHistoryWeb')->group( function () { 
+Route::middleware('auth','preventBackHistoryWeb')->group( function () {
     // event  
     Route::get('/webhome',     [WebHomeController::class, 'index'])->name('webhome');
     Route::get('/userProfile',     [WebHomeController::class, 'userProfile'])->name('userProfile');
@@ -86,7 +87,7 @@ use App\Http\Controllers\Web\WebHomeController;
     Route::post('/ordercancle',[WebHomeController::class,'ordercancle']);
     Route::post('/updatequantity',[WebHomeController::class,'updatequantity']);
      
-  });
+});
 
 Route::group(['prefix' => 'admin'], function () {
 

@@ -17,10 +17,10 @@ class ApiAuthenticate
      */
     public function handle(Request $request, Closure $next)
     {
-        print_r(Auth::guard('api')->check());
+        print_r(Auth::guard('api')->check());exit();
         // echo 'in apu';die;
         $token = $request->bearerToken();
-        // print_r($token);exit();
+        print_r($token);exit();
         return $next($request);
     }
 }

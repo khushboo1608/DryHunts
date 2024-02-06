@@ -402,7 +402,7 @@ class Controller extends BaseController
                 'rate_comment' => ($response->rate_comment ) ? $response->rate_comment  : '',
                 'order_amount' => ($response->order_amount ) ? $response->order_amount  : 0,
                 'order_discount_amount'           => ($response->order_discount_amount ) ? $response->order_discount_amount  :0,
-                'discountpercentage'             => "$discountPercentage",
+                'discountpercentage'             =>"$discountPercentage",
                 'payment_type'           => ($response->payment_type) ? $response->payment_type : '',
                 'payment_transection_id'           => ($response->payment_transection_id) ? $response->payment_transection_id : '',
                 'order_type'           => ($response->order_type) ? $response->order_type : '',
