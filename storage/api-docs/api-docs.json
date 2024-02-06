@@ -1,0 +1,469 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Fitzania",
+        "description": "This is API documentation of OPEN API SWAGGER for developers to test API.",
+        "termsOfService": "http://swagger.io/terms/",
+        "contact": {
+            "email": "fitzania@yopmail.com"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "/Fitzania/api/",
+            "description": "SwaggerHUB API Mocking"
+        }
+    ],
+    "paths": {
+        "/GymRegistration": {
+            "post": {
+                "tags": [
+                    "Gym API Section"
+                ],
+                "summary": "Gym registration process goes here",
+                "operationId": "Registration",
+                "requestBody": {
+                    "description": "Pass gym registration detail",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "user_type",
+                                    "phone",
+                                    "device_type"
+                                ],
+                                "properties": {
+                                    "user_type": {
+                                        "type": "number",
+                                        "example": "1"
+                                    },
+                                    "phone": {
+                                        "type": "string",
+                                        "example": "4785236956"
+                                    },
+                                    "device_type": {
+                                        "type": "string",
+                                        "example": "1"
+                                    },
+                                    "device_token": {
+                                        "type": "string",
+                                        "example": "TestDeviceToken"
+                                    },
+                                    "firebase_uid": {
+                                        "type": "string",
+                                        "example": "test"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/GymLogin": {
+            "post": {
+                "tags": [
+                    "Gym API Section"
+                ],
+                "summary": "Gym sign in process goes here",
+                "description": "Login by email, password",
+                "operationId": "GymLogin",
+                "requestBody": {
+                    "description": "Pass user credentials",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "email",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "user@yopmail.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "format": "password",
+                                        "example": "123456"
+                                    },
+                                    "device_type": {
+                                        "type": "string",
+                                        "example": "1"
+                                    },
+                                    "device_token": {
+                                        "type": "string",
+                                        "example": "TestDeviceToken"
+                                    },
+                                    "firebase_uid": {
+                                        "type": "string",
+                                        "example": "TestFirebaseUid"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Gym login successfully."
+                    },
+                    "404": {
+                        "description": "Gym not found."
+                    }
+                }
+            }
+        },
+        "/GymList": {
+            "post": {
+                "tags": [
+                    "Gym API Section"
+                ],
+                "summary": "Gym list process goes here",
+                "description": "",
+                "operationId": "GymList",
+                "requestBody": {
+                    "description": "You can use search as well",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "page": {
+                                        "type": "number",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Gym list get successfully."
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            }
+        },
+        "/GymListFeature": {
+            "post": {
+                "tags": [
+                    "Gym API Section"
+                ],
+                "summary": "Gym List Featureprocess goes here",
+                "description": "",
+                "operationId": "Gym List",
+                "requestBody": {
+                    "description": "You can use search as well",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "page": {
+                                        "type": "number",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Gym list get successfully."
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            }
+        },
+        "/GetGymDetails": {
+            "post": {
+                "tags": [
+                    "Gym API Section"
+                ],
+                "summary": "Get gym details process goes here",
+                "operationId": "GetGymDetails",
+                "requestBody": {
+                    "description": "Pass gym id of gym to get detail",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "gym_id"
+                                ],
+                                "properties": {
+                                    "gym_id": {
+                                        "type": "string",
+                                        "example": "GXyAiTy4WMAbD4ofjY27roA6tZnf1c8h"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Gym details get successfully."
+                    },
+                    "226": {
+                        "description": "Gym not found."
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            }
+        },
+        "/Registration": {
+            "post": {
+                "tags": [
+                    "User API Section"
+                ],
+                "summary": "User registration process goes here",
+                "description": "User Type : 1-IOS, 2-Android, 3-Website, 4-Admin",
+                "operationId": "Registration",
+                "requestBody": {
+                    "description": "Pass user registration detail",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "user_type",
+                                    "phone",
+                                    "device_type"
+                                ],
+                                "properties": {
+                                    "user_type": {
+                                        "type": "number",
+                                        "example": "1"
+                                    },
+                                    "phone": {
+                                        "type": "string",
+                                        "example": "4785236956"
+                                    },
+                                    "device_type": {
+                                        "type": "string",
+                                        "example": "1"
+                                    },
+                                    "device_token": {
+                                        "type": "string",
+                                        "example": "TestDeviceToken"
+                                    },
+                                    "firebase_uid": {
+                                        "type": "string",
+                                        "example": "test"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/VerifyOtp": {
+            "post": {
+                "tags": [
+                    "User API Section"
+                ],
+                "summary": "User verification process goes here",
+                "description": "User Type : 1-IOS, 2-Android, 3-Website, 4-Admin",
+                "operationId": "VerifyOtp",
+                "requestBody": {
+                    "description": "Pass user Verify detail",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "otp"
+                                ],
+                                "properties": {
+                                    "otp": {
+                                        "type": "number",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/GetUserProfile": {
+            "post": {
+                "tags": [
+                    "User API Section"
+                ],
+                "summary": "Get profile of any user process goes here",
+                "description": "Device Type : 1-IOS, 2-Android, 3-Website<br>User Type : 1-Admin, 2-user",
+                "operationId": "GetUserProfile",
+                "requestBody": {
+                    "description": "Pass user id of user to get profile detail",
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "User profile get successfully."
+                    },
+                    "226": {
+                        "description": "User not found."
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            }
+        },
+        "/ProfileSetup": {
+            "post": {
+                "tags": [
+                    "User API Section"
+                ],
+                "summary": "User profile setup process goes here",
+                "description": "Device Type : 1-IOS, 2-Android, 3-Website<br>User Type : 1-Admin, 2-user",
+                "operationId": "ProfileSetup",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "email",
+                                    "profile_image"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "description": "user name of user",
+                                        "type": "string",
+                                        "default": "user"
+                                    },
+                                    "email": {
+                                        "description": "email of user",
+                                        "type": "string",
+                                        "default": "email"
+                                    },
+                                    "profile_image": {
+                                        "description": "profile image of user need to upload",
+                                        "type": "file",
+                                        "format": "file"
+                                    },
+                                    "gender": {
+                                        "description": "gender of user",
+                                        "type": "string",
+                                        "default": "male"
+                                    },
+                                    "date_of_birth": {
+                                        "description": "user date of birth",
+                                        "type": "date",
+                                        "default": "2001-10-25"
+                                    },
+                                    "age": {
+                                        "description": "age of user",
+                                        "type": "integer",
+                                        "default": "18"
+                                    },
+                                    "city": {
+                                        "description": "city of user",
+                                        "type": "string",
+                                        "default": "surat"
+                                    },
+                                    "pincode": {
+                                        "description": "pincode of user",
+                                        "type": "integer",
+                                        "default": "123456"
+                                    },
+                                    "referral_code": {
+                                        "description": "referral_code of user",
+                                        "type": "string",
+                                        "default": "abc123"
+                                    },
+                                    "firebase_uid": {
+                                        "description": "pass firebase uid",
+                                        "type": "string",
+                                        "format": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Profile setup successfully."
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "name": "bearerAuth",
+                "in": "header",
+                "bearerFormat": "JWT",
+                "scheme": "bearer"
+            }
+        }
+    },
+    "externalDocs": {
+        "description": "Find out more about Swagger",
+        "url": "http://swagger.io"
+    },
+    "security": [
+        []
+    ]
+}

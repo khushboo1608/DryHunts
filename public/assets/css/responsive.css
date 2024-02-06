@@ -1,0 +1,141 @@
+@media(max-width: 1366px){
+    /* .register_row {
+        height: 100%;
+        justify-content: center;
+    }
+    .register {
+        height: auto;
+
+    } */
+}
+@media(max-width: 1200px){
+    .main_form {
+        padding: 30px;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+        width: 100%;
+        margin: 0 auto;
+        height: 100%;
+    }
+    .time_address {
+        flex-direction: column;
+        margin-top: 10px;
+    }
+    .like_comment_tetx, .time_address_text {
+        margin-left: 0px;
+    }
+}
+
+@media(max-width: 992px){
+    .navbar-brand{
+        padding: 0px;
+    }
+    .main_navbar {
+        height: 70px;
+        background-color: #fff;
+        padding: 10px;
+    } 
+    .user_image img {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+    }
+    .main_logo {
+        /* width: 100%;
+        height: 50px; */
+        width: 50px;
+           height: auto;
+    }
+    .banner_title h1 {
+        font-size: 40px;
+        color: #fff;
+        text-align: center;
+    }
+
+    .like_comment_tetx {
+        margin-left: 10px;
+    }
+    .banner_image {
+        height: 280px;
+    }
+    .event_details_screen {
+        margin-top: 30px;
+        margin-bottom: 30px;
+    }
+    .event_details_title h3 {
+        font-size: 25px;
+    }
+    .comment_title{
+        font-size: 20px;
+    }
+}
+@media(max-width: 767px){
+    .user_name h6 {
+        margin-bottom: 0px;
+        margin-left: 10px;
+        color: #495057;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+        max-width: 120px;
+    }
+    .fees_person {
+        flex-direction: column;
+    }
+    .banner_title h1 {
+        font-size: 30px;
+        color: #fff;
+        text-align: center;
+    }
+
+    .copyright {
+        width: 80%;
+        text-align: end;
+    }
+    footer {
+        padding: 10px ;
+    }
+    .form-group{
+        width: 100%;
+    }
+    .filter_nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 20px;
+        flex-direction: column;
+    }
+    .create_event_button{
+        margin-top: 20px;
+    }
+    .form_wrapper .form_logo img {
+        width: 130px;
+    }
+    .register {
+        height: auto;
+    }
+    .form_card {
+        background-color: #fff;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 100%;
+        margin: 0 auto;
+        height: auto;
+        box-shadow: 0 0 18px 8px hsl(0deg 0% 0% / 0%);
+    }
+    .register_row {
+        height: auto;
+        justify-content: center;
+    }
+    .banner_title {
+        padding: 10px;
+    }
+
+
+
+}
+@media(max-width: 576px){ }

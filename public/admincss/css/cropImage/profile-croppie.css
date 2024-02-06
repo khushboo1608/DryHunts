@@ -1,0 +1,55 @@
+
+/* Custom css  */
+figure figcaption {
+    position: relative;
+    bottom: 9px;
+    color: #fff;
+    width: 100%;
+    height: 100px;
+    padding-left: 9px;
+    padding-bottom: 5px;
+    text-shadow: 0 0 10px #000;
+ }
+
+ #upload-demo{
+    width: 250px;
+    height: 250px;
+    padding-bottom:25px;
+ }
+
+ label.cabinet{
+    display: block;
+    cursor: pointer;
+ }
+ 
+ label.cabinet input.file{
+    position: relative;
+    height: 1%;
+    width: auto;
+    opacity: 0;
+    -moz-opacity: 0;
+    filter:progid:DXImageTransform.Microsoft.Alpha(opacity=0);
+    margin-top:-30px;
+ }
+ .modal-backdrop{
+    z-index: 1!important;      
+    display: none !important;
+ }   
+ #cropImagePop .modal-dialog{
+    position: fixed;
+    top: 50%;
+    left:50%;
+    transform: translate(-50%,-50%);
+    z-index: 1000 !important;
+ }
+ .profile-wall-share>ul {
+    background: #282e3f none repeat scroll 0 0;
+ }
+ .gambar {
+     margin-top: 6%;
+     width: 100%;
+     height: 250px;
+ }
+ #uploadbtnImage {
+     margin-top: -12%;
+ }
