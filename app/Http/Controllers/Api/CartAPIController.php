@@ -139,15 +139,18 @@ class CartAPIController extends BaseAPIController
                 $cart_data = Cart::with('ServiceData')->where('user_id',$auth_user->id)->where('cart_status',0)->orderBy('created_at','desc')->get();
                  
                 $cart_data->map(function($post) use ($auth_user){
+                    $post->category_name = $post->CategoryData->category_name;
+                    $post->sub_categories_name = $post->SubCategoryData->sub_categories_name;
                     $post->service_name = $post->ServiceData->service_name;
 
                     $service_single_image = '';
                         if(isset($post->ServiceData->service_single_image))
                         {   
                             // echo 'in';die;
-                            $service_single_image = $this->GetImage( $post->ServiceData->service_single_image,$path=config('global.file_path.service_image'));
+                            $service_single_imasge = $this->GetImage( $post->ServiceData->service_single_image,$path=config('global.file_path.service_image'));
                         } 
-                
+                        // dd($post->ServiceData->service_single_image);
+                        // dd($path=config('global.file_path.service_image'));
                         $post->service_single_image =  $service_single_image;
 
                         $service_detail = ServiceDetails::where('service_detail_id',$post->service_detail_id)->first();

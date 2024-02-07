@@ -16,6 +16,8 @@ class OrderDetail extends Model
     protected $fillable = [
         'order_detail_id',
         'order_id',
+        'category_id',
+        'sub_categories_id',
         'service_id',
         'service_detail_id',
         'order_original_price',
@@ -26,5 +28,13 @@ class OrderDetail extends Model
     ];
     public function ServiceData() {
         return $this->hasOne('App\Models\Service', 'service_id', 'service_id');
+    }
+
+    public function CategoryData() {
+        return $this->hasOne('App\Models\Category', 'category_id', 'category_id');
+    }
+
+    public function SubCategoryData() {
+        return $this->hasOne('App\Models\SubCategory', 'sub_categories_id', 'sub_categories_id');
     }
 }

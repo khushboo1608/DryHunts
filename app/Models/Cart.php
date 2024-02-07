@@ -16,6 +16,8 @@ class Cart extends Model
     protected $fillable = [
         'cart_id',
         'user_id',
+        'category_id',
+        'sub_categories_id',
         'service_id',
         'service_detail_id',
         'cart_service_unit',
@@ -24,7 +26,16 @@ class Cart extends Model
         'cart_service_discount_price',
         'cart_status',     
     ];
+
     public function ServiceData() {
         return $this->hasOne('App\Models\Service', 'service_id', 'service_id');
+    }
+
+    public function CategoryData() {
+        return $this->hasOne('App\Models\Category', 'category_id', 'category_id');
+    }
+
+    public function SubCategoryData() {
+        return $this->hasOne('App\Models\SubCategory', 'sub_categories_id', 'sub_categories_id');
     }
 }

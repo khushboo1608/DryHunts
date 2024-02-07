@@ -30,7 +30,9 @@ class OrderAPIController extends BaseAPIController
                 // echo "<pre>";
                 // print_r($auth_user->id);die;
                 if($auth_user->id!='' && $input['order_amount'] !='' && $input['order_discount_amount'] !=''){
-                    $check_cart = Cart::where('user_id',$auth_user->id)->where('cart_status',0)->orderBy('created_at','desc')->get();
+                    $check_cart = Cart::where('user_id',$auth_user->id)
+                    ->where('cart_status',0)
+                    ->orderBy('created_at','desc')->get();
 
                     if(count($check_cart)>0)
                     {                    
@@ -47,7 +49,9 @@ class OrderAPIController extends BaseAPIController
                         $Order= Order::create($input);
 
                         $check_cart->map(function($pro) use ($Order){
-
+                            $category_id = $pro->CategoryData->category_id;
+                            $sub_categories_id = $pro->SubCategoryData->sub_categories_id;
+                            // dd( $pro->CategoryData->category_id);
                             $service_id = $pro->ServiceData->service_id;
                             $ServiceDetails = $pro->ServiceData->ServiceDetails;
                             $ServiceDetailsarray= $ServiceDetails->sortByDesc('created_at')->values();
@@ -62,6 +66,8 @@ class OrderAPIController extends BaseAPIController
                                         $detailinput = array(
                                             'order_detail_id'      => $order_detail_id,
                                             'order_id' =>  $Order->order_id,
+                                            'category_id' => $category_id,
+                                            'sub_categories_id' => $sub_categories_id,
                                             'service_id' => $service_id,
                                             'service_detail_id'  => $pro->service_detail_id,
                                             // 'order_original_price' =>$pro->ServiceData->service_original_price,
@@ -72,6 +78,7 @@ class OrderAPIController extends BaseAPIController
                                             'order_unit' =>$pro->cart_service_unit,
 
                                         );
+                                        // dd($detailinput);
                                         $OrderDetail = OrderDetail::create($detailinput);
                                     
                         // }
@@ -94,6 +101,8 @@ class OrderAPIController extends BaseAPIController
                             $orderdetail = array(
                                 'order_detail_id'      => $detail->order_detail_id,
                                 'order_id' =>   $detail->order_id,
+                                'category_id' =>   $detail->category_id,
+                                'sub_categories_id' =>   $detail->sub_categories_id,
                                 'service_id' => $detail->service_id,
                                 'service_detail_id'  => $detail->service_detail_id,
                                 'order_original_price' =>$detail->order_original_price,
@@ -110,7 +119,7 @@ class OrderAPIController extends BaseAPIController
                         // echo "<pre>";
                         // print_r( $orderdetail);die;
                         // $check_order_detail->order_details = $orderdetail;
-                        Cart::where('user_id',$auth_user->id)->delete();
+                        // Cart::where('user_id',$auth_user->id)->delete();
                         $order_data = $this->OrderResponse($check_order_detail);
                         return $this->sendResponse($order_data, __('messages.api.order.order_add_success'));
                     }
@@ -176,6 +185,10 @@ class OrderAPIController extends BaseAPIController
 
                         $order_details->order_id =($order_details->order_id) ?$order_details->order_id : '';
 
+                        $order_details->category_id =($order_details->category_id) ?$order_details->category_id : '';
+
+                        $order_details->sub_categories_id =($order_details->sub_categories_id) ?$order_details->sub_categories_id : '';
+
                         $order_details->service_id =($order_details->service_id) ?$order_details->service_id : '';
 
                         $order_details->service_detail_id =($order_details->service_detail_id) ?$order_details->service_detail_id : '';
@@ -239,7 +252,13 @@ class OrderAPIController extends BaseAPIController
                     // print_r($check_order_detail->OrderDetails);die;
 
                     foreach($check_order_detail->OrderDetails as $detail){
-                        $service = Service::where('service_status',0)->where('service_id',$detail->service_id)->first();
+                        // $service = Service::where('service_status',0)->where('service_id',$detail->service_id)->first();
+                        $service = Service::where('service_status', 0)
+                        ->where('service_id', $detail->service_id)
+                        ->leftJoin('categories', 'service.category_id', '=', 'categories.category_id')
+                        ->leftJoin('sub_categories', 'service.sub_categories_id', '=', 'sub_categories.sub_categories_id')
+                        ->select('service.*', 'categories.category_name as category_name', 'sub_categories.sub_categories_name as sub_categories_name')
+                        ->first();
                         $service_single_image = '';
                         if(isset($service->service_single_image))
                         {   
@@ -263,6 +282,10 @@ class OrderAPIController extends BaseAPIController
                         $orderdetail []= array(
                             'order_detail_id'      => $detail->order_detail_id,
                             'order_id' =>   $detail->order_id,
+                            'category_id' =>   $detail->category_id,
+                            'category_name' =>   $service->category_name,
+                            'sub_categories_id' =>   $detail->sub_categories_id,
+                            'sub_categories_name' =>   $service->sub_categories_name,
                             'service_id' => $detail->service_id,                           
                             'service_name' =>  $service->service_name,
                             'service_image' =>  $service_single_image,

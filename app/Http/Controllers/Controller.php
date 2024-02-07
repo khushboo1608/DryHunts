@@ -519,6 +519,10 @@ class Controller extends BaseController
         $data = [
             'cart_id'           => ($response->cart_id) ? $response->cart_id: '',
             'user_id'           => ($response->user_id) ? $response->user_id: '',
+            'category_id'           => ($response->category_id) ? $response->category_id: '',
+            'category_name'           => ($response->category_name) ? $response->category_name: '',
+            'sub_categories_id'           => ($response->sub_categories_id) ? $response->sub_categories_id: '',
+            'sub_categories_name'           => ($response->sub_categories_name) ? $response->sub_categories_name: '',
             'service_id'           => ($response->service_id) ? $response->service_id: '',
             'service_name'           => ($response->service_name) ? $response->service_name: '',
             'service_single_image'           => ($response->service_single_image) ? $response->service_single_image: '',                    
@@ -556,10 +560,14 @@ class Controller extends BaseController
                     else{
                     $cartdiscountPercentage = 0;  
                     }  
-
-
+                
                 $arr = [
                     'cart_id'           => ($value->cart_id) ? $value->cart_id: '',
+                    'user_id'           => ($value->user_id) ? $value->user_id: '',
+                    'category_id'           => ($value->category_id) ? $value->category_id: '',
+                    'category_name'           => ($value->category_name) ? $value->category_name: '',
+                    'sub_categories_id'           => ($value->sub_categories_id) ? $value->sub_categories_id: '',
+                    'sub_categories_name'           => ($value->sub_categories_name) ? $value->sub_categories_name: '',
                     'user_id'           => ($value->user_id) ? $value->user_id: '',
                     'service_id'           => ($value->service_id) ? $value->service_id: '',
                     'service_name'           => ($value->service_name) ? $value->service_name: '',

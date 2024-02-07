@@ -16,6 +16,8 @@ class CreateCartsTable extends Migration
         Schema::create('carts', function (Blueprint $table) {
             $table->string('cart_id')->unique()->primary();
             $table->integer('user_id');
+            $table->string('category_id');
+            $table->string('sub_categories_id');
             $table->string('service_id');
             $table->string('service_detail_id');
             $table->string('cart_service_unit');            

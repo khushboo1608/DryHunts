@@ -566,9 +566,13 @@ class UserAPIController extends BaseAPIController
                 $input = $request->all();
                 $auth_user = Auth::guard('api')->user();
                 // $user = User::find($auth_user->id);
-                $notifi = Notifications::where('user_id',$auth_user->id)
-                ->where('notification_status',0)
-                ->orderBy('created_at','desc')->get();
+                $notifi = Notifications::where(function($query) use ($auth_user) {
+                    $query->where('user_id', $auth_user->id)
+                          ->orWhere('user_id', 0);
+                })
+                ->where('notification_status', 0)
+                ->orderBy('created_at', 'desc')
+                ->get();
 
                 $data_notifi = [];
                 foreach ($notifi as $values) {

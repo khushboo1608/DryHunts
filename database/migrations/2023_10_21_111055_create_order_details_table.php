@@ -16,6 +16,8 @@ class CreateOrderDetailsTable extends Migration
         Schema::create('order_details', function (Blueprint $table) {
             $table->string('order_detail_id')->unique()->primary();
             $table->string('order_id');
+            $table->string('category_id');
+            $table->string('sub_categories_id');
             $table->string('service_id');
             $table->string('service_detail_id');
             $table->float('order_original_price', 8, 2);
