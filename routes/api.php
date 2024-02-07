@@ -63,6 +63,7 @@ Route::middleware('auth:api')->group( function () {
     Route::post('ProfileSetup',     [UserAPIController::class,'ProfileSetup']);
     Route::get('GetUserProfile',   [UserAPIController::class,'GetUserProfile']);
     Route::post('ProfileUpdate',   [UserAPIController::class,'ProfileUpdate']);
+    Route::get('GetNotification',     [UserAPIController::class,'GetNotification']);
     
     Route::post('ChangePassword',   [UserAPIController::class,'ChangePassword']);
     Route::get('Logout',            [UserAPIController::class,'Logout']);
@@ -72,6 +73,9 @@ Route::middleware('auth:api')->group( function () {
     
     //Category
     Route::post('CategoryList',     [CategoryAPIController::class,'CategoryList']); 
+
+    //sub sub category
+    Route::post('SubCategoryList',     [CategoryAPIController::class,'SubCategoryList']); 
 
     //Service
     Route::post('ServiceList',     [ServiceAPIController::class,'ServiceList']); 

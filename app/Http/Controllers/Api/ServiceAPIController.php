@@ -24,10 +24,13 @@ class ServiceAPIController extends BaseAPIController
                 $input = $request->all();  
                 $auth_user = Auth::guard('api')->user(); 
                 $page = $input['page'];
-                $service = Service::where('category_id',$input['category_id'])->where('service_status',0)->orderBy('created_at','desc')->get();
+                $service = Service::where('category_id',$input['category_id'])
+                ->where('sub_categories_id',$input['sub_categories_id'])
+                ->where('service_status',0)->orderBy('created_at','desc')->get();
                 $service->map(function($pro) use ($auth_user){
 
                     $pro->category_name = $pro->CategoryData->category_name;
+                    $pro->sub_categories_name = $pro->SubCategoryData->sub_categories_name ?? '';
 
                     $service_details = $pro->ServiceDetails->sortByDesc('created_at')->values();
                     $service_details->map(function($service_details){
@@ -83,6 +86,7 @@ class ServiceAPIController extends BaseAPIController
                 $service_id          = $input['service_id'];
                 $service = Service::where('service_status',0)->where('service_id',$service_id)->first();
                     $service->category_name   = $service->CategoryData->category_name;
+                    $service->sub_categories_name   = $service->SubCategoryData->sub_categories_name ?? '' ;
                     $service_details = $service->ServiceDetails->sortByDesc('created_at')->values();
                     $service_details->map(function($service_details){
                         $service_details->service_original_price =($service_details->service_original_price) ?$service_details->service_original_price : '';
@@ -140,9 +144,11 @@ class ServiceAPIController extends BaseAPIController
                     $service->map(function($pro) use ($auth_user){
 
                         // $pro->category_name = $pro->CategoryData->category_name;
-                          $categoryName = $pro->CategoryData->category_name ?? "";
-                        
+                        $categoryName = $pro->CategoryData->category_name ?? "";
                         $pro->category_name = $categoryName;
+
+                        $subcategoryName = $pro->SubCategoryData->sub_categories_name ?? "";
+                        $pro->sub_categories_name = $subcategoryName;
     
                         $service_details = $pro->ServiceDetails->sortByDesc('created_at')->values();
                         $service_details->map(function($service_details){
@@ -209,8 +215,10 @@ class ServiceAPIController extends BaseAPIController
                 $service = Service::where('is_popular',1)->where('service_status',0)->orderBy('created_at','desc')->get();
                 $service->map(function ($pro) use ($auth_user) {
                         $categoryName = $pro->CategoryData->category_name ?? "";
-                        
                         $pro->category_name = $categoryName;
+
+                        $subcategoryName = $pro->SubCategoryData->sub_categories_name ?? "";
+                        $pro->sub_categories_name = $subcategoryName;
                         // dd($categoryName);
                         // $pro->category_name = $pro->CategoryData->category_name;
 

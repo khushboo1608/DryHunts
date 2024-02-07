@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Validator;
 use App\Models\Settings;
 use App\Models\UserAuthMaster;
+use App\Models\Notifications;
 use App\Models\NotificationMaster;
 use Hash;
 use Mail;
@@ -553,6 +554,39 @@ class UserAPIController extends BaseAPIController
         {
             $auth_user = Auth::guard('api')->user();
             $this->serviceLogError($service_name = 'ChangePassword',$user_id = $auth_user->id,$message = $e->getMessage(),$requested_field = json_encode($request->all()),$response_data=$e);
+            return $this->sendError($e->getMessage(), config('global.null_object'),401,false);
+        }
+    }
+
+    public function GetNotification(Request $request)
+    {
+        try{
+            if(Auth::guard('api')->check())
+            {   
+                $input = $request->all();
+                $auth_user = Auth::guard('api')->user();
+                // $user = User::find($auth_user->id);
+                $notifi = Notifications::where('user_id',$auth_user->id)
+                ->where('notification_status',0)
+                ->orderBy('created_at','desc')->get();
+
+                $data_notifi = [];
+                foreach ($notifi as $values) {
+                    $data_notifi[] = $this->NotificationListResponse($values);
+                }
+
+                // $result = $this->NotificationListResponse($notifi);
+                // $token = $request->bearerToken();
+                // $user->token = $token;
+                return $this->sendResponse($data_notifi, __('messages.api.notification.notification_get_success'));  
+            }else
+            {
+                return $this->sendError(__('messages.api.authentication_err_message'), config('global.null_object'),401,false);
+            }
+        } catch(\Exception $e)
+        {
+            $auth_user = Auth::guard('api')->user();
+            $this->serviceLogError($service_name = 'GetNotification',$user_id = $auth_user->id,$message = $e->getMessage(),$requested_field = json_encode($request->all()),$response_data=$e);
             return $this->sendError($e->getMessage(), config('global.null_object'),401,false);
         }
     }

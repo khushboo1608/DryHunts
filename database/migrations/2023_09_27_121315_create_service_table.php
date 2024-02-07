@@ -16,6 +16,7 @@ class CreateServiceTable extends Migration
         Schema::create('service', function (Blueprint $table) {
             $table->string('service_id')->unique()->primary();
             $table->string('category_id');
+            $table->string('sub_categories_id');
             $table->string('service_name');
             $table->text('service_description')->nullable();
             $table->string('service_single_image')->nullable();

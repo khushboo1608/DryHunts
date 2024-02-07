@@ -51,24 +51,32 @@ class CategoryAPIController extends BaseAPIController
             {          
                 $input = $request->all();  
                 $auth_user = Auth::guard('api')->user(); 
-                $page           = $input['page'];
-                $category = SubCategory::where('category_id',$input['category_id'])->where('sub_category_status',0)->orderBy('created_at','desc')->get();
-                $data_category = $this->SubCategoryListResponse($category);
-                $result = $this->ResponseWithPagination($page,$data_category);
-                return $this->sendResponse($result, __('messages.api.category.sub_category_get_success'));  
-            
+    
+                $category = SubCategory::where('category_id', $input['category_id'])
+                                        ->where('sub_categories_status', 0)
+                                        ->orderBy('created_at', 'desc')
+                                        ->get();
+                $category->map(function($pro) use ($auth_user){
+                    $pro->category_name = $pro->CategoryData->category_name;
+                });
+                $data_category = [];
+                foreach ($category as $subcategory) {
+                    $data_category[] = $this->SubCategoryResponse($subcategory);
+                }
+    
+                return $this->sendResponse($data_category, __('messages.api.category.sub_category_get_success'));  
             }
             else
             {                
-                return $this->sendError(__('messages.api.authentication_err_message'), config('global.null_object'),401,false);
+                return $this->sendError(__('messages.api.authentication_err_message'), config('global.null_object'), 401, false);
             }
            
         }
         catch(\Exception $e)
         {
             $auth_user = Auth::guard('api')->user();
-            $this->serviceLogError($service_name = 'SubCategoryList',$user_id = $auth_user->id,$message = $e->getMessage(),$requested_field = json_encode($request->all()),$response_data=$e);
-            return $this->sendError($e->getMessage(), config('global.null_object'),401,false);
+            $this->serviceLogError($service_name = 'SubCategoryList', $user_id = $auth_user->id, $message = $e->getMessage(), $requested_field = json_encode($request->all()), $response_data = $e);
+            return $this->sendError($e->getMessage(), config('global.null_object'), 401, false);
         }
     }
 

@@ -219,6 +219,31 @@ class Controller extends BaseController
         return $data;
     }
 
+    public function SubCategoryResponse($response)
+    {
+        $subcategory_image = '';
+        if(isset($response->sub_categories_image))
+        {   
+            $subcategory_image = $this->GetImage($response->sub_categories_image, $path = config('global.file_path.sub_category_image'));
+        } 
+    
+        $created_at = $this->getLocalTime(strtotime($response->created_at), 'Asia/Kolkata');
+        $updated_at = $this->getLocalTime(strtotime($response->updated_at), 'Asia/Kolkata'); 
+    
+        $data = [
+            'sub_categories_id'      => ($response->sub_categories_id ) ? $response->sub_categories_id  : '',
+            'category_id'            => ($response->category_id ) ? $response->category_id  : '',
+            'category_name'          => ($response->category_name) ? $response->category_name : '',       
+            'sub_categories_name'    => ($response->sub_categories_name) ? $response->sub_categories_name : '',
+            'sub_categories_image'   => $subcategory_image,
+            'created_at'             => $created_at,
+            'updated_at'             => $updated_at,
+            'sub_categories_status'  => ($response->sub_categories_status) ? $response->sub_categories_status : 0,
+        ];
+    
+        return $data;
+    }
+
     public function CategoryListResponse($response)
     {
         $data = [];
@@ -270,7 +295,9 @@ class Controller extends BaseController
         $data = [
                 'service_id'           => ($response->service_id) ? $response->service_id : '',
                 'category_id'           => ($response->category_id ) ? $response->category_id  : '',
-                'category_name'        => ($response->category_name) ? $response->category_name : '',               
+                'category_name'        => ($response->category_name) ? $response->category_name : '',  
+                'sub_categories_id'           => ($response->sub_categories_id ) ? $response->sub_categories_id  : '',
+                'sub_categories_name'        => ($response->sub_categories_name) ? $response->sub_categories_name : '',                          
                 'service_name' => ($response->service_name ) ? $response->service_name  : '',
                 'service_description' => ($response->service_description ) ? $response->service_description  : '',
                 'service_single_image'  =>$service_single_image,   
@@ -317,6 +344,8 @@ class Controller extends BaseController
                     'service_id'           => ($value->service_id) ? $value->service_id : '',
                     'category_id'           => ($value->category_id ) ? $value->category_id  : '',
                     'category_name'        => ($value->category_name) ? $value->category_name : '',
+                    'sub_categories_id'           => ($value->sub_categories_id ) ? $value->sub_categories_id  : '',
+                    'sub_categories_name'        => ($value->sub_categories_name) ? $value->sub_categories_name : '',
                     'service_name' => ($value->service_name ) ? $value->service_name  : '',
                     'service_description' => ($value->service_description ) ? $value->service_description  : '',
                     'service_single_image'  =>$service_single_image,   
@@ -940,6 +969,37 @@ class Controller extends BaseController
         }
         return $data2;
     }
+
+    public function NotificationListResponse($response)
+    {
+        // INSERT INTO `notifications`(`notifications_id`, `notification_click`, `notification_type`, `no_type`, `user_id`, `order_id`, `notification_title`, `notification_msg`, `notification_image`, `notification_status`, `created_at`, `updated_at`)
+        $notification_image = '';
+        if(isset($response->notification_image))
+        {   
+            $notification_image = $this->GetImage($response->notification_image,$path=config('global.file_path.notification_image'));
+        } 
+
+        $created_at =$this->getLocalTime(strtotime($response->created_at), 'Asia/Kolkata');
+        $updated_at =  $this->getLocalTime(strtotime($response->updated_at), 'Asia/Kolkata'); 
+        $data = [
+            'notifications_id'           => ($response->notifications_id ) ? $response->notifications_id  : '',
+            'notification_image'  =>  $notification_image,    
+            'notification_click'        => ($response->notification_click) ? $response->notification_click : '',
+            'notification_type'        => ($response->notification_type) ? $response->notification_type : '',
+            'no_type'        => ($response->no_type) ? $response->no_type : '',
+            'user_id'        => ($response->user_id) ? $response->user_id : '',
+            'order_id'        => ($response->order_id) ? $response->order_id : '',
+            'notification_title'        => ($response->notification_title) ? $response->notification_title : '',
+            'notification_msg'        => ($response->notification_msg) ? $response->notification_msg : '',
+            'created_at'            => $created_at,
+            'updated_at'            => $updated_at,
+            'notification_status'            => ($response->notification_status) ? $response->notification_status:0,
+        ];
+        return $data;
+    }
+
+
+
     
 }
 

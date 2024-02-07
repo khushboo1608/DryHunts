@@ -16,6 +16,7 @@ class Service extends Model
     protected $fillable = [
         'service_id',
         'category_id',
+        'sub_categories_id',
         'service_name',
         'service_description',
         'service_single_image',
@@ -29,6 +30,9 @@ class Service extends Model
     
     public function CategoryData() {
         return $this->hasOne('App\Models\Category', 'category_id', 'category_id');
+    }
+    public function SubCategoryData() {
+        return $this->hasOne('App\Models\SubCategory', 'sub_categories_id', 'sub_categories_id');
     }
     public function ServiceDetails() {
         return $this->hasMany('App\Models\ServiceDetails', 'service_id', 'service_id');
